@@ -1,0 +1,376 @@
+{
+  "name": "device-toolkit",
+  "displayName": "Device Toolkit",
+  "description": "Android Studio-style mobile & emulator developer controls. Manage Dark Mode, Navigation Mode, Accessibility (TalkBack & Select to Speak), Display & Font Scaling, Layout Bounds, and Screen Recording directly from your editor.",
+  "version": "0.0.1",
+  "publisher": "antonyaiwin",
+  "license": "MIT",
+  "homepage": "https://github.com/antonyaiwin/device-toolkit-vs-code-ext#readme",
+  "bugs": {
+    "url": "https://github.com/antonyaiwin/device-toolkit-vs-code-ext/issues"
+  },
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "android",
+    "emulator",
+    "adb",
+    "flutter",
+    "avd",
+    "debug",
+    "toolbar",
+    "mobile"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antonyaiwin/device-toolkit-vs-code-ext.git"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mobileDeviceToolkitContainer",
+          "title": "Device Toolkit",
+          "icon": "assets/avd-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "mobileDeviceToolkitContainer": [
+        {
+          "id": "mobileDeviceToolkit",
+          "name": "Device Toolkit",
+          "icon": "assets/avd-icon.svg",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "device-toolkit.openControls",
+        "title": "Open Device Controls",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/mobile_menu_light.svg",
+          "dark": "./assets/icons/mobile_menu_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.selectDevice",
+        "title": "Select Android Device",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/mobile_menu_light.svg",
+          "dark": "./assets/icons/mobile_menu_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.refreshDevices",
+        "title": "Refresh Device List",
+        "category": "Device Toolkit",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "device-toolkit.startRecording",
+        "title": "Record Screen",
+        "category": "Device Toolkit",
+        "icon": "$(record)"
+      },
+      {
+        "command": "device-toolkit.toolbarToggleDarkMode",
+        "title": "Toggle Dark Mode",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/dark_mode_light.svg",
+          "dark": "./assets/icons/dark_mode_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarSetNavMode",
+        "title": "Navigation Mode…",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/steppers_light.svg",
+          "dark": "./assets/icons/steppers_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarToggleTalkBack",
+        "title": "Toggle TalkBack",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/text_to_speech_light.svg",
+          "dark": "./assets/icons/text_to_speech_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarToggleSelectToSpeak",
+        "title": "Toggle Select to Speak",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/select_to_speak_light.svg",
+          "dark": "./assets/icons/select_to_speak_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarSetFontSize",
+        "title": "Font Size…",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/format_size_light.svg",
+          "dark": "./assets/icons/format_size_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarSetDisplaySize",
+        "title": "Display Size…",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/settings_overscan_light.svg",
+          "dark": "./assets/icons/settings_overscan_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarToggleLayoutBounds",
+        "title": "Toggle Layout Bounds",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/border_horizontal_light.svg",
+          "dark": "./assets/icons/border_horizontal_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.avd.refresh",
+        "title": "Refresh Device Controls",
+        "category": "Device Toolkit",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "debug/toolBar": [
+        {
+          "command": "device-toolkit.openControls",
+          "when": "device-toolkit.showOpenControls",
+          "group": "navigation@109"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleDarkMode",
+          "when": "device-toolkit.showDarkMode",
+          "group": "navigation@101"
+        },
+        {
+          "command": "device-toolkit.toolbarSetNavMode",
+          "when": "device-toolkit.showNavMode",
+          "group": "navigation@102"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleTalkBack",
+          "when": "device-toolkit.showTalkBack",
+          "group": "navigation@103"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleSelectToSpeak",
+          "when": "device-toolkit.showSelectToSpeak",
+          "group": "navigation@104"
+        },
+        {
+          "command": "device-toolkit.toolbarSetFontSize",
+          "when": "device-toolkit.showFontSize",
+          "group": "navigation@105"
+        },
+        {
+          "command": "device-toolkit.toolbarSetDisplaySize",
+          "when": "device-toolkit.showDisplaySize",
+          "group": "navigation@106"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleLayoutBounds",
+          "when": "device-toolkit.showLayoutBounds",
+          "group": "navigation@107"
+        },
+        {
+          "command": "device-toolkit.startRecording",
+          "when": "device-toolkit.showRecord",
+          "group": "navigation@108"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "device-toolkit.avd.refresh",
+          "when": "view == mobileDeviceToolkit",
+          "group": "navigation@0"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "device-toolkit.openControls",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.selectDevice",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.refreshDevices",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleDarkMode",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarSetNavMode",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleTalkBack",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleSelectToSpeak",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarSetFontSize",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarSetDisplaySize",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleLayoutBounds",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.startRecording",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.avd.refresh",
+          "when": "true"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Device Toolkit",
+      "properties": {
+        "device-toolkit.autoDetectDevices": {
+          "order": 1,
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect and monitor connected Android devices."
+        },
+        "device-toolkit.showOpenControlsButton": {
+          "order": 2,
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Open Device Controls button on the debug toolbar."
+        },
+        "device-toolkit.showDarkModeButton": {
+          "order": 3,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Dark Mode toggle button in the debug toolbar."
+        },
+        "device-toolkit.showNavModeButton": {
+          "order": 4,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Navigation Mode picker button in the debug toolbar."
+        },
+        "device-toolkit.showTalkBackButton": {
+          "order": 5,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a TalkBack toggle button in the debug toolbar."
+        },
+        "device-toolkit.showSelectToSpeakButton": {
+          "order": 6,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Select to Speak toggle button in the debug toolbar."
+        },
+        "device-toolkit.showFontSizeButton": {
+          "order": 7,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Font Size picker button in the debug toolbar."
+        },
+        "device-toolkit.showDisplaySizeButton": {
+          "order": 8,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Display Size picker button in the debug toolbar."
+        },
+        "device-toolkit.showLayoutBoundsButton": {
+          "order": 9,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Layout Bounds toggle button in the debug toolbar."
+        },
+        "device-toolkit.showRecordButton": {
+          "order": 10,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Screen Recording button in the debug toolbar."
+        },
+        "device-toolkit.openRecordingAfterSave": {
+          "order": 11,
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically open the saved screen recording in the VS Code media viewer after stopping."
+        },
+        "device-toolkit.outputDirectory": {
+          "order": 12,
+          "type": "string",
+          "default": "",
+          "description": "Directory to save screen recordings. Defaults to 'emulator-captures/' in the workspace root."
+        },
+        "device-toolkit.androidSdkPath": {
+          "order": 13,
+          "type": "string",
+          "default": "",
+          "description": "Custom root directory path for the Android SDK (e.g., C:\\Users\\Name\\AppData\\Local\\Android\\Sdk or ~/Library/Android/sdk)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/jsdom": "^28.0.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.20",
+    "@types/vscode": "1.90.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  }
+}
