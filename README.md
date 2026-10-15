@@ -1,6 +1,6 @@
 # Device Toolkit
 
-> **Android Studio-style mobile & emulator developer controls inside VS Code's debug toolbar and sidebar.** Easily manage Dark Mode, Navigation Mode, Accessibility (TalkBack & Select to Speak), Display & Font Scaling, Layout Bounds, and Screen Recording directly from your editor.
+> **Android Studio-style mobile & emulator developer controls inside VS Code's debug toolbar and sidebar.** Easily manage Dark Mode, Navigation Mode, Connectivity (Wi-Fi, Mobile Data & Airplane Mode), Accessibility (TalkBack & Select to Speak), Display & Font Scaling, Layout Bounds, and Screen Recording directly from your editor.
 
 ---
 
@@ -40,6 +40,7 @@ When developing mobile applications with **Flutter**, **React Native**, or **And
 | **Font & Display Scaling** | Adjust font sizes (Small to Largest) and display density (280–560 DPI)                                               | <img src="assets/docs/font-scaling.png" width="350" alt="Font Scaling"> <img src="assets/docs/display-size.png" width="350" alt="Display Size"> |
 | **Accessibility Tools**    | Toggle TalkBack screen reader and Select to Speak accessibility services                                             | <img src="assets/docs/talkback.png" width="350" alt="TalkBack"> <img src="assets/docs/select-to-speak.png" width="350" alt="Select to Speak">   |
 | **Layout Bounds**          | Show or hide view boundary borders for pixel-perfect UI debugging                                                    | <img src="assets/docs/layout-bounds.png" width="350" alt="Layout Bounds">                                                                       |
+| **Network & Connectivity** | Toggle Wi-Fi, Mobile Data, and Airplane Mode instantly without opening Android system settings                       | <img src="assets/docs/network-controls.png" width="350" alt="Network Controls">                                                                 |
 | **Screen Recording**       | Record device screen (up to 3 minutes) with optional auto-open in editor                                             | <img src="assets/docs/screen-recording.png" width="350" alt="Screen Recording">                                                                 |
 | **Multi-Device Support**   | Auto-detect multiple devices; click the device name header at the top of the sidebar view to switch instantly        | <img src="assets/docs/device-switcher.png" width="350" alt="Device Switcher">                                                                   |
 
@@ -98,6 +99,9 @@ Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) and type **Device Toolkit**:
 - `Font Size…`
 - `Display Size…`
 - `Toggle Layout Bounds`
+- `Toggle Wi-Fi`
+- `Toggle Mobile Data`
+- `Toggle Airplane Mode`
 - `Record Screen`
 
 ---
@@ -117,6 +121,9 @@ Customize settings in **Settings** (`Ctrl+,` / `Cmd+,`) under **Device Toolkit**
 | `showFontSizeButton`      | `boolean` | `false` | Show a Font Size picker button on the debug toolbar.                                         |
 | `showDisplaySizeButton`   | `boolean` | `false` | Show a Display Size picker button on the debug toolbar.                                      |
 | `showLayoutBoundsButton`  | `boolean` | `false` | Show a Layout Bounds toggle button on the debug toolbar.                                     |
+| `showWifiButton`          | `boolean` | `false` | Show a Wi-Fi toggle button on the debug toolbar.                                             |
+| `showMobileDataButton`    | `boolean` | `false` | Show a Mobile Data toggle button on the debug toolbar.                                       |
+| `showAirplaneModeButton`  | `boolean` | `false` | Show an Airplane Mode toggle button on the debug toolbar.                                    |
 | `showRecordButton`        | `boolean` | `false` | Show a Screen Recording button on the debug toolbar.                                         |
 | `openRecordingAfterSave`  | `boolean` | `true`  | Automatically open saved screen recordings in the VS Code media viewer.                      |
 | `outputDirectory`         | `string`  | `""`    | Directory to save screen recordings. Defaults to `emulator-captures/` in the workspace root. |
