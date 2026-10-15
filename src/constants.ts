@@ -23,6 +23,9 @@ export const COMMANDS = {
   SET_FONT_SIZE: `${EXTENSION_ID}.toolbarSetFontSize`,
   SET_DISPLAY_SIZE: `${EXTENSION_ID}.toolbarSetDisplaySize`,
   TOGGLE_LAYOUT_BOUNDS: `${EXTENSION_ID}.toolbarToggleLayoutBounds`,
+  TOGGLE_WIFI: `${EXTENSION_ID}.toolbarToggleWifi`,
+  TOGGLE_MOBILE_DATA: `${EXTENSION_ID}.toolbarToggleMobileData`,
+  TOGGLE_AIRPLANE_MODE: `${EXTENSION_ID}.toolbarToggleAirplaneMode`,
 } as const;
 
 /** Context Key Identifiers for VS Code UI visibility */
@@ -38,4 +41,7 @@ export const CONTEXT_KEYS = {
   SHOW_LAYOUT_BOUNDS: `${EXTENSION_ID}.showLayoutBounds`,
   SHOW_RECORD: `${EXTENSION_ID}.showRecord`,
   IS_RECORDING: `${EXTENSION_ID}.isRecording`,
+  SHOW_WIFI: `${EXTENSION_ID}.showWifi`,
+  SHOW_MOBILE_DATA: `${EXTENSION_ID}.showMobileData`,
+  SHOW_AIRPLANE_MODE: `${EXTENSION_ID}.showAirplaneMode`,
 } as const;

@@ -20,6 +20,9 @@ type InMsg =
   | { type: 'setFontSize'; value: string }
   | { type: 'setDisplaySize'; value: string }
   | { type: 'setLayoutBounds'; value: boolean }
+  | { type: 'setWifi'; value: boolean }
+  | { type: 'setMobileData'; value: boolean }
+  | { type: 'setAirplaneMode'; value: boolean }
   | { type: 'toggleRecording' }
   | { type: 'refresh' };
 
@@ -116,6 +119,12 @@ export class DeviceControlsView implements vscode.WebviewViewProvider {
         case 'setFontSize':    await this.adb.setFontScale(serial, msg.value); break;
         case 'setDisplaySize': await this.adb.setDisplayDensity(serial, msg.value); break;
         case 'setLayoutBounds': await this.adb.setLayoutBounds(serial, msg.value); break;
+        case 'setWifi':        await this.adb.setWifi(serial, msg.value); break;
+        case 'setMobileData':  await this.adb.setMobileData(serial, msg.value); break;
+        case 'setAirplaneMode':
+          await this.adb.setAirplaneMode(serial, msg.value);
+          setTimeout(() => this._refresh(), 500);
+          break;
         case 'toggleRecording':
           if (!this.adb.isRecording) {
             // Start: launch recording + open dedicated panel
@@ -390,6 +399,22 @@ export class DeviceControlsView implements vscode.WebviewViewProvider {
   </div>
 
   <div class="divider"></div>
+  <div class="section-label">Network &amp; Connectivity</div>
+
+  <div class="row">
+    <span class="row-label">Wi-Fi</span>
+    <input type="checkbox" id="wifi">
+  </div>
+  <div class="row">
+    <span class="row-label">Mobile Data</span>
+    <input type="checkbox" id="mobileData">
+  </div>
+  <div class="row">
+    <span class="row-label">Airplane Mode</span>
+    <input type="checkbox" id="airplaneMode">
+  </div>
+
+  <div class="divider"></div>
   <div class="rec-area" id="recArea">
     <!-- Shown when NOT recording -->
     <button class="btn-rec" id="startRecBtn">
@@ -418,6 +443,9 @@ export class DeviceControlsView implements vscode.WebviewViewProvider {
   $('fontSize').addEventListener('change', e => vscode.postMessage({ type: 'setFontSize', value: e.target.value }));
   $('displaySize').addEventListener('change', e => vscode.postMessage({ type: 'setDisplaySize', value: e.target.value }));
   $('layoutBounds').addEventListener('change', e => vscode.postMessage({ type: 'setLayoutBounds', value: e.target.checked }));
+  $('wifi').addEventListener('change', e => vscode.postMessage({ type: 'setWifi', value: e.target.checked }));
+  $('mobileData').addEventListener('change', e => vscode.postMessage({ type: 'setMobileData', value: e.target.checked }));
+  $('airplaneMode').addEventListener('change', e => vscode.postMessage({ type: 'setAirplaneMode', value: e.target.checked }));
   $('startRecBtn').addEventListener('click', () => vscode.postMessage({ type: 'toggleRecording' }));
   $('stopRecBtn').addEventListener('click', () => {
     if (!$('stopRecBtn').disabled) vscode.postMessage({ type: 'toggleRecording' });
@@ -453,6 +481,9 @@ export class DeviceControlsView implements vscode.WebviewViewProvider {
       $('fontSize').value = s.fontSize;
       $('displaySize').value = s.displaySize;
       $('layoutBounds').checked = s.layoutBounds;
+      $('wifi').checked = s.wifi;
+      $('mobileData').checked = s.mobileData;
+      $('airplaneMode').checked = s.airplaneMode;
       setRecording(s.isRecording, false);
       setDisabled(false);
       return;
@@ -483,7 +514,7 @@ export class DeviceControlsView implements vscode.WebviewViewProvider {
   }
 
   function setDisabled(v) {
-    ['darkTheme','navigationMode','talkBack','selectToSpeak','fontSize','displaySize','layoutBounds']
+    ['darkTheme','navigationMode','talkBack','selectToSpeak','fontSize','displaySize','layoutBounds','wifi','mobileData','airplaneMode']
       .forEach(id => $(id).disabled = v);
   }
 

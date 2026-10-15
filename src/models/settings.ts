@@ -11,6 +11,9 @@ export interface ExtensionSettings {
   showDisplaySizeButton: boolean;
   showLayoutBoundsButton: boolean;
   showRecordButton: boolean;
+  showWifiButton: boolean;
+  showMobileDataButton: boolean;
+  showAirplaneModeButton: boolean;
   outputDirectory: string;
   androidSdkPath?: string;
 }

@@ -26,6 +26,9 @@ export interface DeviceSettingsState {
   displaySize: string;
   layoutBounds: boolean;
   isRecording: boolean;
+  wifi: boolean;
+  mobileData: boolean;
+  airplaneMode: boolean;
 }
 
 // ── Accessibility service identifiers ───────────────────────────────────────

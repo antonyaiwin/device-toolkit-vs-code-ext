@@ -43,5 +43,8 @@ export class ToolbarService {
     set(CONTEXT_KEYS.SHOW_DISPLAY_SIZE,   has && s.showDisplaySizeButton);
     set(CONTEXT_KEYS.SHOW_LAYOUT_BOUNDS,  has && s.showLayoutBoundsButton);
     set(CONTEXT_KEYS.SHOW_RECORD,        has && s.showRecordButton);
+    set(CONTEXT_KEYS.SHOW_WIFI,          has && s.showWifiButton);
+    set(CONTEXT_KEYS.SHOW_MOBILE_DATA,   has && s.showMobileDataButton);
+    set(CONTEXT_KEYS.SHOW_AIRPLANE_MODE, has && s.showAirplaneModeButton);
   }
 }

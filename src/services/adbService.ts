@@ -2,7 +2,7 @@ import { exec, spawn } from 'child_process';
 import { promisify } from 'util';
 import * as vscode from 'vscode';
 import type { ChildProcess } from 'child_process';
-import { TALKBACK_SERVICE, SELECT_TO_SPEAK_SERVICE, SELECT_TO_SPEAK_SERVICE_AOSP } from '../models/device';
+import { TALKBACK_SERVICE, SELECT_TO_SPEAK_SERVICE, SELECT_TO_SPEAK_SERVICE_AOSP, DeviceSettingsState } from '../models/device';
 
 const execAsync = promisify(exec);
 
@@ -429,18 +429,101 @@ export class AdbService {
     });
   }
 
+  // ── Network & Connectivity ─────────────────────────────────────────────────
+
+  /**
+   * Reads Wi-Fi state from Settings.Global.WIFI_ON.
+   * In AOSP (WifiSettingsStore), wifi_on tracks four states:
+   *   0 (WIFI_DISABLED): Wi-Fi is completely turned off.
+   *   1 (WIFI_ENABLED): Wi-Fi is turned on under normal conditions.
+   *   2 (WIFI_ENABLED_AIRPLANE_OVERRIDE): Wi-Fi is turned on while Airplane Mode is active.
+   *   3 (WIFI_DISABLED_AIRPLANE_ON): Wi-Fi was automatically disabled by Airplane Mode.
+   * Both 1 and 2 indicate Wi-Fi is currently enabled.
+   */
+  async getWifi(serial: string): Promise<boolean> {
+    try {
+      const r = (await this.runShellCommand(serial, 'settings get global wifi_on')).trim();
+      return r === '1' || r === '2';
+    } catch { return false; }
+  }
+
+  async setWifi(serial: string, enable: boolean): Promise<void> {
+    try {
+      await this.runShellCommand(serial, `svc wifi ${enable ? 'enable' : 'disable'}`);
+    } catch {
+      await this.runShellCommand(serial, `cmd wifi set-wifi-enabled ${enable ? 'enabled' : 'disabled'}`);
+    }
+  }
+
+  async getMobileData(serial: string): Promise<boolean> {
+    try {
+      const r = await this.runShellCommand(serial, 'settings get global mobile_data');
+      return r.trim() === '1';
+    } catch { return false; }
+  }
+
+  async setMobileData(serial: string, enable: boolean): Promise<void> {
+    try {
+      await this.runShellCommand(serial, `svc data ${enable ? 'enable' : 'disable'}`);
+    } catch {
+      await this.runShellCommand(serial, `cmd phone data set-data-enabled ${enable}`);
+    }
+  }
+
+  async getAirplaneMode(serial: string): Promise<boolean> {
+    try {
+      const r = await this.runShellCommand(serial, 'settings get global airplane_mode_on');
+      return r.trim() === '1';
+    } catch { return false; }
+  }
+
+  async setAirplaneMode(serial: string, enable: boolean): Promise<void> {
+    try {
+      await this.runShellCommand(serial, `cmd connectivity airplane-mode ${enable ? 'enable' : 'disable'}`);
+    } catch {
+      // Fallback for older Android versions
+      await this.runShellCommand(serial, `settings put global airplane_mode_on ${enable ? '1' : '0'}`);
+      await this.runShellCommand(serial, `am broadcast -a android.intent.action.AIRPLANE_MODE --ez state ${enable}`);
+    }
+  }
+
   /** Read ALL device settings in one parallel batch. */
-  async readDeviceState(serial: string, isRecording: boolean) {
-    const [darkTheme, navigationMode, talkBack, selectToSpeak, fontSize, displaySize, layoutBounds] =
-      await Promise.all([
-        this.getDarkMode(serial),
-        this.getNavigationMode(serial),
-        this.getAccessibilityServiceEnabled(serial, TALKBACK_SERVICE),
-        this.getAccessibilityServiceEnabled(serial, SELECT_TO_SPEAK_SERVICE),
-        this.getFontScale(serial),
-        this.getDisplayDensity(serial),
-        this.getLayoutBounds(serial),
-      ]);
-    return { darkTheme, navigationMode, talkBack, selectToSpeak, fontSize, displaySize, layoutBounds, isRecording };
+  async readDeviceState(serial: string, isRecording: boolean): Promise<DeviceSettingsState> {
+    const [
+      darkTheme,
+      navigationMode,
+      talkBack,
+      selectToSpeak,
+      fontSize,
+      displaySize,
+      layoutBounds,
+      wifi,
+      mobileData,
+      airplaneMode,
+    ] = await Promise.all([
+      this.getDarkMode(serial),
+      this.getNavigationMode(serial),
+      this.getAccessibilityServiceEnabled(serial, TALKBACK_SERVICE),
+      this.getAccessibilityServiceEnabled(serial, SELECT_TO_SPEAK_SERVICE),
+      this.getFontScale(serial),
+      this.getDisplayDensity(serial),
+      this.getLayoutBounds(serial),
+      this.getWifi(serial),
+      this.getMobileData(serial),
+      this.getAirplaneMode(serial),
+    ]);
+    return {
+      darkTheme,
+      navigationMode,
+      talkBack,
+      selectToSpeak,
+      fontSize,
+      displaySize,
+      layoutBounds,
+      isRecording,
+      wifi,
+      mobileData,
+      airplaneMode,
+    };
   }
 }

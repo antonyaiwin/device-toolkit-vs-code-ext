@@ -149,6 +149,33 @@
         }
       },
       {
+        "command": "device-toolkit.toolbarToggleWifi",
+        "title": "Toggle Wi-Fi",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/wifi_light.svg",
+          "dark": "./assets/icons/wifi_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarToggleMobileData",
+        "title": "Toggle Mobile Data",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/mobile_data_light.svg",
+          "dark": "./assets/icons/mobile_data_dark.svg"
+        }
+      },
+      {
+        "command": "device-toolkit.toolbarToggleAirplaneMode",
+        "title": "Toggle Airplane Mode",
+        "category": "Device Toolkit",
+        "icon": {
+          "light": "./assets/icons/airplane_mode_light.svg",
+          "dark": "./assets/icons/airplane_mode_dark.svg"
+        }
+      },
+      {
         "command": "device-toolkit.avd.refresh",
         "title": "Refresh Device Controls",
         "category": "Device Toolkit",
@@ -160,7 +187,7 @@
         {
           "command": "device-toolkit.openControls",
           "when": "device-toolkit.showOpenControls",
-          "group": "navigation@109"
+          "group": "navigation@200"
         },
         {
           "command": "device-toolkit.toolbarToggleDarkMode",
@@ -201,6 +228,21 @@
           "command": "device-toolkit.startRecording",
           "when": "device-toolkit.showRecord",
           "group": "navigation@108"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleWifi",
+          "when": "device-toolkit.showWifi",
+          "group": "navigation@109"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleMobileData",
+          "when": "device-toolkit.showMobileData",
+          "group": "navigation@110"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleAirplaneMode",
+          "when": "device-toolkit.showAirplaneMode",
+          "group": "navigation@111"
         }
       ],
       "view/title": [
@@ -249,6 +291,18 @@
         },
         {
           "command": "device-toolkit.toolbarToggleLayoutBounds",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleWifi",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleMobileData",
+          "when": "true"
+        },
+        {
+          "command": "device-toolkit.toolbarToggleAirplaneMode",
           "when": "true"
         },
         {
@@ -324,20 +378,38 @@
           "default": false,
           "description": "Show a Screen Recording button in the debug toolbar."
         },
-        "device-toolkit.openRecordingAfterSave": {
+        "device-toolkit.showWifiButton": {
           "order": 11,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Wi-Fi toggle button in the debug toolbar."
+        },
+        "device-toolkit.showMobileDataButton": {
+          "order": 12,
+          "type": "boolean",
+          "default": false,
+          "description": "Show a Mobile Data toggle button in the debug toolbar."
+        },
+        "device-toolkit.showAirplaneModeButton": {
+          "order": 13,
+          "type": "boolean",
+          "default": false,
+          "description": "Show an Airplane Mode toggle button in the debug toolbar."
+        },
+        "device-toolkit.openRecordingAfterSave": {
+          "order": 14,
           "type": "boolean",
           "default": false,
           "description": "Automatically open the saved screen recording in the VS Code media viewer after stopping."
         },
         "device-toolkit.outputDirectory": {
-          "order": 12,
+          "order": 15,
           "type": "string",
           "default": "",
           "description": "Directory to save screen recordings. Defaults to 'emulator-captures/' in the workspace root."
         },
         "device-toolkit.androidSdkPath": {
-          "order": 13,
+          "order": 16,
           "type": "string",
           "default": "",
           "description": "Custom root directory path for the Android SDK (e.g., C:\\Users\\Name\\AppData\\Local\\Android\\Sdk or ~/Library/Android/sdk)."

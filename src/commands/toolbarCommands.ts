@@ -174,4 +174,43 @@ export function registerToolbarCommands(
       })
     )
   );
+
+  // ── Toggle Wi-Fi ───────────────────────────────────────────────────────────
+  context.subscriptions.push(
+    vscode.commands.registerCommand(COMMANDS.TOGGLE_WIFI, () =>
+      withDevice(async (serial, name) => {
+        const isEnabled = await adb.getWifi(serial);
+        await adb.setWifi(serial, !isEnabled);
+        vscode.window.showInformationMessage(
+          `${!isEnabled ? '📶 Wi-Fi enabled' : '📶 Wi-Fi disabled'} on ${name}`
+        );
+      })
+    )
+  );
+
+  // ── Toggle Mobile Data ─────────────────────────────────────────────────────
+  context.subscriptions.push(
+    vscode.commands.registerCommand(COMMANDS.TOGGLE_MOBILE_DATA, () =>
+      withDevice(async (serial, name) => {
+        const isEnabled = await adb.getMobileData(serial);
+        await adb.setMobileData(serial, !isEnabled);
+        vscode.window.showInformationMessage(
+          `${!isEnabled ? '📶 Mobile Data enabled' : '📶 Mobile Data disabled'} on ${name}`
+        );
+      })
+    )
+  );
+
+  // ── Toggle Airplane Mode ───────────────────────────────────────────────────
+  context.subscriptions.push(
+    vscode.commands.registerCommand(COMMANDS.TOGGLE_AIRPLANE_MODE, () =>
+      withDevice(async (serial, name) => {
+        const isEnabled = await adb.getAirplaneMode(serial);
+        await adb.setAirplaneMode(serial, !isEnabled);
+        vscode.window.showInformationMessage(
+          `${!isEnabled ? '✈️ Airplane mode enabled' : '✈️ Airplane mode disabled'} on ${name}`
+        );
+      })
+    )
+  );
 }

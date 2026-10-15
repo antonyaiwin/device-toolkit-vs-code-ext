@@ -30,6 +30,9 @@ export class SettingsService {
       showDisplaySizeButton:  c.get<boolean>('showDisplaySizeButton', false),
       showLayoutBoundsButton: c.get<boolean>('showLayoutBoundsButton', false),
       showRecordButton:       c.get<boolean>('showRecordButton', false),
+      showWifiButton:         c.get<boolean>('showWifiButton', false),
+      showMobileDataButton:   c.get<boolean>('showMobileDataButton', false),
+      showAirplaneModeButton: c.get<boolean>('showAirplaneModeButton', false),
       outputDirectory:        c.get<string>('outputDirectory', ''),
       androidSdkPath:         c.get<string>('androidSdkPath', ''),
     };
