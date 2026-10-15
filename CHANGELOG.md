@@ -4,6 +4,18 @@ All notable changes to **Device Toolkit** will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.0.2]
+
+### Added
+
+- **Network & Connectivity Controls**:
+  - **Wi-Fi Toggle**: Toggle Wi-Fi state instantly on connected Android emulators and devices.
+  - **Mobile Data Toggle**: Enable or disable cellular mobile data.
+  - **Airplane Mode Toggle**: Toggle system-wide Airplane Mode.
+  - **Activity Bar Sidebar Webview**: Dedicated **Network & Connectivity** section with live status indicators and checkboxes for Wi-Fi, Mobile Data, and Airplane Mode.
+  - **Debug Toolbar Quick Actions**: Optional toolbar buttons for Wi-Fi (`showWifiButton`), Mobile Data (`showMobileDataButton`), and Airplane Mode (`showAirplaneModeButton`) with custom Material Symbols icons.
+  - **Command Palette Commands**: `Device Toolkit: Toggle Wi-Fi`, `Device Toolkit: Toggle Mobile Data`, and `Device Toolkit: Toggle Airplane Mode`.
+
 ---
 
 ## [0.0.1] - Initial Release

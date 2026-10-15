@@ -56,6 +56,8 @@ When developing mobile applications with **Flutter**, **React Native**, or **And
 
 ### Installing from VS Code Marketplace
 
+Install directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=antonyaiwin.device-toolkit):
+
 1. Open VS Code.
 2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
 3. Search for **Device Toolkit**.

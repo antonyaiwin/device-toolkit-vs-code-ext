@@ -2,7 +2,7 @@
   "name": "device-toolkit",
   "displayName": "Device Toolkit",
   "description": "Android Studio-style mobile & emulator developer controls. Manage Dark Mode, Navigation Mode, Accessibility (TalkBack & Select to Speak), Display & Font Scaling, Layout Bounds, and Screen Recording directly from your editor.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "antonyaiwin",
   "license": "MIT",
   "homepage": "https://github.com/antonyaiwin/device-toolkit-vs-code-ext#readme",
